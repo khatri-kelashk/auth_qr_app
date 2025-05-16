@@ -1,11 +1,12 @@
 export type AuthStackParamList = {
   Login: undefined;
   Register: undefined;
+  Dashboard: undefined;
   // Add other auth-related screens here
 };
 
 // Extend this as your app grows
 export type RootStackParamList = AuthStackParamList & {
-  // Home: undefined;
+  Dashboard: undefined;
   // Other screens...
 };
