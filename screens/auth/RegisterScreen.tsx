@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AuthStackParamList } from '../../types/navigationTypes';
-import { API_URL } from '../../constants/constants';
 import { getEmptyHeadersForHttpReq } from '../../constants/token';
+import { API_URL } from '../../constants/constants';
 
 type RegisterScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'Register'>;
 
@@ -23,8 +22,6 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
       Alert.alert('Error', 'Please fill all fields');
       return;
     }
-    console.log('Registration attempt with:', email, user_name, password);
-    // navigation.navigate('Home');
     try {
       const _response = await axios.post(
       `${API_URL}user/register`,
@@ -40,9 +37,8 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
     navigation.navigate('Login');
 
   } catch (error: any) {
-    console.error("Error in Login:", error);
     Alert.alert(
-      "Login Failed",
+      "Registration Failed",
       error.response?.data?.message || "An error occurred during login"
     );
     throw error;
